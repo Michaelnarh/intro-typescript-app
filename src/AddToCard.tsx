@@ -42,9 +42,6 @@ const AddToCard:React.FC<IProps> = ({people, setArrProfile}) => {
             note:"",
             caption:"",
            })
-
-           console.warn("finieshed");
-           
         
     }
   return (
