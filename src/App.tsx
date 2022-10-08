@@ -1,32 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import { profileProps } from './TypeRef';
+import AddToCard from './AddToCard';
 
-interface propTypes{
-  name:string,
-  img:string,
-  note:string,
-  caption:string,
-  speciality:string[]
-}
+
 
 function App() {
+  const [profile, setProfile] = useState<profileProps["person"]>([{
+    name: "michael",
+    img: 'https://miro.medium.com/max/900/1*gkU6sO05pIuPYNgHaaTOxQ.jpeg',
+    note: "Checking the typescript work",
+    speciality: ['java', 'javascript', 'php', 'random'],
+    caption: ' Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatum, illum saepe praesentium voluptatibus quisquam animi deleniti quae vitae optio aperiam nisi modi aliquid!'
+  }])
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="container">
+          {profile.length > 0 && profile.map((person,index) => (
+        <div className="card" key={index}>
+            <div>
+              <div className='profile-and-name'>
+
+                <h5>{person.name}</h5>
+                <img src={person.img} alt='...' className='img-size' width={50} height={50} />
+              </div>
+              <p>{person.caption}</p>
+            </div>
+        </div>
+          ))}
+      </div>
+      <AddToCard people={profile} setArrProfile={setProfile} />
     </div>
   );
 }
